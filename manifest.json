@@ -1,0 +1,43 @@
+{
+  "name": "Find Manual V1",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "options_page": "html/OptionPage.html",
+  "content_scripts": [
+    {
+      "js": ["js/ContentScript.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "icons": {
+    "16": "asset/image/icon_120.png",
+    "48": "asset/image/icon_120.png",
+    "128": "asset/image/icon_120.png"
+  },
+  "action": {
+    "default_icon" : "asset/image/icon_120.png",
+    "default_popup": "./html/Popup.html"
+  },
+  "background": {
+    "service_worker": "js/Background.js"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "asset/image/manual-image.svg",
+        "asset/image/Stroke.svg",
+        "asset/font/Inter-SemiBold.ttf",
+        "html/OptionPage.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
