@@ -235,6 +235,8 @@ body  {
 
 .item {
     width: 70%;
+    cursor: pointer;
+    text-decoration: underline;
     margin-left: 20px;
     margin-top: 12px;
     display: flex;

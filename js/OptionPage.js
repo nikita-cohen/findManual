@@ -13,11 +13,15 @@ async function onClickSearchButton() {
             document.getElementById('search-input-container').style.height = 'auto';
 
 
-            const response = await fetch('https://search.findmanual.guru/manual/search/enter/' + value);
+            const response = await fetch('https://search.findmanual.guru/manual/search/all/' + value);
             const data = await response.json().catch(e => console.log(e));
 
             if (data?.length > 0) {
                 const resultAfterEnter = document.getElementById('result-after-enter');
+
+                chrome.storage.local.get('history_list', (result) => {
+                    saveHistoryElementToStorage(value, result);
+                })
 
                 const newDiv = document.createElement('div');
                 newDiv.classList.add('header-after-search');
@@ -28,12 +32,12 @@ async function onClickSearchButton() {
 
                 data.forEach(manual => {
                     const newSearchResult = document.createElement('a');
-                    if (manual.title) {
-                        newSearchResult.innerHTML = manual.title;
-                        newSearchResult.href = manual.url;
+                    if (manual._source.title) {
+                        newSearchResult.innerHTML = manual._source.title;
+                        newSearchResult.href = manual._source.url;
                     } else {
                         newSearchResult.innerHTML = manual.label;
-                        newSearchResult.href = manual.url;
+                        newSearchResult.href = manual._source.url;
                     }
 
                     newSearchResult.addEventListener('click' , (event) => {
@@ -107,7 +111,7 @@ function checkDate(date) {
     if ((date.getUTCDate() + 1).toString().length < 2) {
         obj.day = "0" + date.getUTCDate();
     } else {
-        obj.dayday = date.getUTCDate();
+        obj.day = date.getUTCDate();
     }
 
     return obj;
@@ -134,12 +138,12 @@ function setOnChange() {
 
                 data.forEach(manual => {
                     const newSearchResult = document.createElement('a');
-                    if (manual.title) {
-                        newSearchResult.innerHTML = manual.title;
+                    if (manual._source.title) {
+                        newSearchResult.innerHTML = manual._source.title;
                     } else {
                         newSearchResult.innerHTML = manual.label;
                     }
-                    newSearchResult.href = manual.url;
+                    newSearchResult.href = manual._source.url;
                     newSearchResult.addEventListener('click' , (event) => {
                         chrome.storage.local.get('history_list', (result) => {
                             saveHistoryElementToStorage(manual, result);
@@ -179,14 +183,13 @@ function setOnKeyPress() {
 
 function saveHistoryElementToStorage(link, result) {
     let today = new Date();
-
     const date = checkDate(today);
 
     let time = date.hour + ":" + date.minutes + " " + date.day + "." + date.month + "." + today.getFullYear();
 
     const newArray = result.history_list;
-    if (link.title) {
-        newArray.push({title: link.title, url: link.url, date: time});
+    if (link) {
+        newArray.push({title: link , date: time});
     }
 
     chrome.storage.local.set({'history_list': newArray}).then(data => console.log("ok"));
@@ -203,13 +206,18 @@ function createHistoryElement(link) {
     img.src = '../asset/image/TimeCircle.svg';
 
     const aTag = document.createElement('a');
-    aTag.href = link.url;
     aTag.innerHTML = link.title;
 
     aTag.addEventListener('click', (event) => {
         chrome.storage.local.get('history_list', (result) => {
-            saveHistoryElementToStorage(link, result);
-            window.open(event.target.href, '_blank');
+            saveHistoryElementToStorage(link.title , result);
+            const resultAfterEnter = document.getElementById('history-result');
+            document.getElementById('search-input').value = link.title;
+            while (resultAfterEnter.childNodes.length > 1) {
+                resultAfterEnter.removeChild(resultAfterEnter.lastChild);
+            }
+            document.getElementById('history-container').style.display = 'none';
+            onClickSearchButton().then();
         });
     })
 
@@ -304,22 +312,21 @@ async function setInputValue() {
             child = insideResult.lastElementChild;
         }
 
-        const response = await fetch('https://search.findmanual.guru/manual/search/' + decodeURI(window.location.hash).substring(1));
+        const response = await fetch('https://search.findmanual.guru/manual/search/' + window.location.hash.substring(1));
         const data = await response.json();
+
+        console.log(data.length)
 
         data.forEach(manual => {
             const newSearchResult = document.createElement('a');
-            if (manual.title) {
-                newSearchResult.innerHTML = manual.title;
+            if (manual._source.title) {
+                newSearchResult.innerHTML = manual._source.title;
             } else {
                 newSearchResult.innerHTML = manual.label;
             }
-            newSearchResult.href = manual.url;
+            newSearchResult.href = manual._source.url;
             newSearchResult.addEventListener('click', (event) => {
-                chrome.storage.local.get('history_list', (result) => {
-                    saveHistoryElementToStorage(manual, result);
-                })
-
+                window.open(event.target.href, '_blank');
             })
             insideResult.appendChild(newSearchResult);
         })

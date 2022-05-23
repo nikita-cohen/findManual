@@ -12,26 +12,22 @@
     font-style: normal;
 }
 
-body  {
+body {
     margin: 0;
-
-
 }
-
 
 .first-container {
     min-height: 100vh;
     width: 100%;
     left: 2271px;
     top: 562px;
-    background-image: url("../asset/image/background-find-manual.svg");
+    background-image: url("../asset/image/backgroundTest.svg");
     z-index: 0;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .image-history-container {
-
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -134,7 +130,7 @@ body  {
 .history-result {
     background: #F1F8FF;
     display: flex;
-    height: 315px;
+    height: 100vh;
     overflow-y: auto;
     flex-direction: column;
 }
@@ -185,7 +181,7 @@ body  {
 }
 
 .result-after-enter {
-    height: 560px;
+    height: 777px;
     overflow-y: auto;
     background: #F1F8FF;
     display: flex;
@@ -239,6 +235,8 @@ body  {
     margin-left: 20px;
     margin-top: 12px;
     display: flex;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .history-container {
