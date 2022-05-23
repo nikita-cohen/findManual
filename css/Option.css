@@ -21,10 +21,35 @@ body {
     width: 100%;
     left: 2271px;
     top: 562px;
-    background-image: url("../asset/image/backgroundTest.svg");
     z-index: 0;
-    background-repeat: no-repeat;
+    background-image: url("../asset/image/background-option.png");
+    background-repeat:  no-repeat;
     background-size: cover;
+}
+
+.header-container {
+    height: 112px;
+    width: 100%;
+    left: 425px;
+    top: 87px;
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.header-two {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.header-pop-up {
+    margin-left: 400px;
 }
 
 .image-history-container {
@@ -44,7 +69,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 282px;
+    margin-top: 37px;
     position: relative;
     z-index: 1;
 }

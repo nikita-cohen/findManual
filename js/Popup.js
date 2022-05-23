@@ -2,7 +2,7 @@ const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
 const backBtnAfterEnter = document.getElementById('back-btn-after-enter');
 const backBtnHistory = document.getElementById('back-btn-history');
-const historyButton = document.getElementById('img-btn-history');
+const historyButton = document.getElementById('image-history');
 
 async function onClickSearchButton() {
     const value = document.getElementById('search-input').value;
@@ -252,7 +252,7 @@ function setOnClick() {
     backBtnHistory.addEventListener('click', (event) => {
         const resultAfterEnter = document.getElementById('history-result');
 
-        while (resultAfterEnter.childNodes.length > 1) {
+        while (resultAfterEnter.childNodes.length > 2) {
             resultAfterEnter.removeChild(resultAfterEnter.lastChild);
         }
 
