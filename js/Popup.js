@@ -4,7 +4,7 @@ const backBtnAfterEnter = document.getElementById('back-btn-after-enter');
 const backBtnHistory = document.getElementById('back-btn-history');
 const historyButton = document.getElementById('image-history');
 
-async function onClickSearchButton() {
+async function onClickSearchButton(type) {
     const value = document.getElementById('search-input').value;
     const searchInputInFunc = document.getElementById('search-input');
 
@@ -18,9 +18,11 @@ async function onClickSearchButton() {
             if (data?.length > 0) {
                 const resultAfterEnter = document.getElementById('result-after-enter');
 
-                chrome.storage.local.get('history_list', (result) => {
-                    saveHistoryElementToStorage(value, result);
-                })
+                if (type === "search") {
+                    chrome.storage.local.get('history_list', (result) => {
+                        saveHistoryElementToStorage(value, result);
+                    })
+                }
 
                 const newDiv = document.createElement('div');
                 newDiv.classList.add('header-after-search');
@@ -171,7 +173,7 @@ function setOnKeyPress() {
     searchInput.addEventListener('keypress', (event) => {
         if (event.key === "Enter") {
             if (event.target.value !== "") {
-                onClickSearchButton().then();
+                onClickSearchButton("search").then();
             }
         }
     })
@@ -213,7 +215,7 @@ function createHistoryElement(link) {
                 resultAfterEnter.removeChild(resultAfterEnter.lastChild);
             }
             document.getElementById('history-container').style.display = 'none';
-            onClickSearchButton().then();
+            onClickSearchButton("none").then();
         });
     })
 
@@ -233,7 +235,7 @@ function createHistoryElement(link) {
 
 function setOnClick() {
     searchButton.addEventListener('click', (event) => {
-        onClickSearchButton().then();
+        onClickSearchButton("search").then();
     })
 
     backBtnAfterEnter.addEventListener('click', (event) => {
