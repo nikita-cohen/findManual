@@ -325,9 +325,6 @@ async function setInputValue() {
                 newSearchResult.innerHTML = manual.label;
             }
             newSearchResult.href = manual._source.url;
-            newSearchResult.addEventListener('click', (event) => {
-                window.open(event.target.href, '_blank');
-            })
             insideResult.appendChild(newSearchResult);
         })
 

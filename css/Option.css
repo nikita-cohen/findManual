@@ -1,20 +1,23 @@
-@font-face {
-    font-family: Helvetica;
-    src: local('Helvetica'), url(../asset/font/Helvetica.ttf) format('truetype');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: Helvetica;
-    src: local('Helvetica-Bold'), url(../asset/font/Helvetica-Bold.ttf) format('truetype');
-    font-weight: 700;
-    font-style: normal;
-}
 
 body {
     margin: 0;
 }
+
+.folder {
+    margin-top: 252px;
+}
+
+.folder-two {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -122px;
+}
+
+.folder-two > img {
+    height: 120px;
+}
+
 
 .first-container {
     min-height: 100vh;
@@ -22,9 +25,7 @@ body {
     left: 2271px;
     top: 562px;
     z-index: 0;
-    background-image: url("../asset/image/background-option.png");
-    background-repeat:  no-repeat;
-    background-size: cover;
+    background: linear-gradient(107deg, rgba(201,59,57,1) 0%, rgba(152,119,153,1) 60%, rgba(14,43,162,1) 96%, rgba(17,57,182,1) 100%);
 }
 
 .header-container {
@@ -161,7 +162,7 @@ body {
 }
 
 .history-result-text {
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, sens-serif, serif;
     font-size: 20px;
     font-weight: 700;
     line-height: 23px;
@@ -197,7 +198,7 @@ body {
 
 .inside-result a {
     margin-top: 19px;
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, sens-serif, serif;
     font-size: 24px;
     font-weight: 700;
     line-height: 28px;
@@ -214,7 +215,7 @@ body {
 }
 
 .header-after-search {
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, sens-serif, serif;
     margin-left: 15px;
     margin-top: 21px;
     font-size: 30px;
@@ -232,7 +233,7 @@ body {
 
 .inner-result-after-enter a {
     margin-top: 15px;
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, sens-serif, serif;
     font-size: 24px;
     font-weight: 700;
     line-height: 28px;
@@ -241,7 +242,7 @@ body {
 }
 
 .header-history-result {
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, sens-serif, serif;
     font-size: 30px;
     font-weight: 700;
     line-height: 34px;
@@ -270,7 +271,7 @@ body {
 }
 
 .item-date {
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, sens-serif, serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 21px;
@@ -284,7 +285,7 @@ body {
 }
 
 .item a {
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, sens-serif, serif;
     font-size: 22px;
     font-weight: 400;
     line-height: 25px;
