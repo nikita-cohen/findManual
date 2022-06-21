@@ -64,7 +64,7 @@ function addButtonToWalmart() {
 }
 
 function addButtonToBestBuy() {
-    const bustBuyDiv = document.querySelector('div.pricing-price.pricing-lib-price-19-2218-14.priceView-price');
+    const bustBuyDiv = document.querySelector('div.pricing-price.pricing-lib-price-19-2224-22.priceView-price');
 
     if (bustBuyDiv) {
         const trialDiv = document.querySelector('div.product-return-message.product-return-message--pdp.product-return-message--pdp-large');
