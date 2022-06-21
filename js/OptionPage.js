@@ -164,7 +164,7 @@ function setOnChange() {
                 }
 
             }
-        }, 500);
+        }, 350);
 
     })
 
