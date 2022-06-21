@@ -3,6 +3,7 @@ const searchButton = document.getElementById('search-button');
 const backBtnAfterEnter = document.getElementById('back-btn-after-enter');
 const backBtnHistory = document.getElementById('back-btn-history');
 const historyButton = document.getElementById('image-history');
+let timer = null;
 
 async function onClickSearchButton(type) {
     const value = document.getElementById('search-input').value;
@@ -42,9 +43,6 @@ async function onClickSearchButton(type) {
                         newSearchResult.href = manual._source.url;
                     }
 
-                    newSearchResult.addEventListener('click' , (event) => {
-                        window.open(event.target.href, '_blank');
-                    })
                     innerResult.appendChild(newSearchResult);
                 })
 
@@ -121,47 +119,53 @@ function checkDate(date) {
 
 function setOnChange() {
     searchInput.addEventListener('input', async (e) => {
-        const list = document.getElementById('list');
-        if (e.target.value === "") {
-            list.style.display = 'none';
-            document.getElementById('search-input-container').style.height = 'auto';
-        } else {
-            try {
-                const insideResult = document.getElementById('inside-result');
-
-                let child = insideResult.lastElementChild;
-                while (child) {
-                    insideResult.removeChild(child);
-                    child = insideResult.lastElementChild;
-                }
-
-                const response = await fetch('https://search.findmanual.guru/manual/search/' + e.target.value);
-                const data = await response.json();
-
-                data.forEach(manual => {
-                    const newSearchResult = document.createElement('a');
-                    if (manual._source.title) {
-                        newSearchResult.innerHTML = manual._source.title;
-                    } else {
-                        newSearchResult.innerHTML = manual.label;
-                    }
-                    newSearchResult.href = manual._source.url;
-                    insideResult.appendChild(newSearchResult);
-                })
-
-                if (data.length > 0) {
-                    document.getElementById('search-input-container').style.overflowY = 'auto';
-                    document.getElementById('search-input-container').style.height = '300px';
-                    list.style.display = 'block';
-                } else {
-                    list.style.display = 'none';
-                    document.getElementById('search-input-container').style.height = 'auto';
-                }
-            } catch (e) {
-                console.log(e)
-            }
-
+        if(timer !== null) {
+            clearTimeout(timer);
         }
+        timer = setTimeout(async function() {
+            const list = document.getElementById('list');
+            if (e.target.value === "") {
+                list.style.display = 'none';
+                document.getElementById('search-input-container').style.height = 'auto';
+            } else {
+                try {
+                    const insideResult = document.getElementById('inside-result');
+
+                    let child = insideResult.lastElementChild;
+                    while (child) {
+                        insideResult.removeChild(child);
+                        child = insideResult.lastElementChild;
+                    }
+
+                    const response = await fetch('https://search.findmanual.guru/manual/search/' + e.target.value);
+                    const data = await response.json();
+
+                    data.forEach(manual => {
+                        const newSearchResult = document.createElement('a');
+                        if (manual._source.title) {
+                            newSearchResult.innerHTML = manual._source.title;
+                        } else {
+                            newSearchResult.innerHTML = manual.label;
+                        }
+                        newSearchResult.href = manual._source.url;
+                        insideResult.appendChild(newSearchResult);
+                    })
+
+                    if (data.length > 0) {
+                        document.getElementById('search-input-container').style.overflowY = 'auto';
+                        document.getElementById('search-input-container').style.height = '300px';
+                        list.style.display = 'block';
+                    } else {
+                        list.style.display = 'none';
+                        document.getElementById('search-input-container').style.height = 'auto';
+                    }
+                } catch (e) {
+                    console.log(e)
+                }
+
+            }
+        }, 500);
+
     })
 
 
@@ -310,8 +314,6 @@ async function setInputValue() {
 
         const response = await fetch('https://search.findmanual.guru/manual/search/' + window.location.hash.substring(1));
         const data = await response.json();
-
-        console.log(data.length)
 
         data.forEach(manual => {
             const newSearchResult = document.createElement('a');

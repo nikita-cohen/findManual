@@ -156,7 +156,6 @@ body {
 .history-result {
     background: #F1F8FF;
     display: flex;
-    height: 100vh;
     overflow-y: auto;
     flex-direction: column;
 }
