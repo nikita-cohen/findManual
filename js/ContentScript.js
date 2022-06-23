@@ -1,7 +1,9 @@
 function addButtonToWalmart() {
+    console.log("here 1")
     const divToSetButton = document.querySelector('div.pt3');
 
     if (divToSetButton) {
+        console.log("here 2")
         const insideButton = document.querySelector('div.pt3');
 
         const newDiv = document.createElement('div');
@@ -59,6 +61,7 @@ function addButtonToWalmart() {
             })
         }
 
+        console.log("here 3")
         insideButton.insertAdjacentElement('beforeend', newDiv);
     }
 }
@@ -254,12 +257,11 @@ window.addEventListener('load', (event) =>{
 chrome.storage.onChanged.addListener(function (changes, namespace) {
     for (let [key, {oldValue, newValue}] of Object.entries(changes)) {
         if (key === 'change_url') {
-            console.log(key)
             setTimeout(() => {
                 if (!document.querySelector('#first-new-div')){
                     addButtonToWalmart();
                 }
-            }, 1500)
+            }, 4000)
 
         }
     }
