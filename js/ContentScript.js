@@ -1,9 +1,7 @@
 function addButtonToWalmart() {
-    console.log("here 1")
     const divToSetButton = document.querySelector('div.pt3');
 
     if (divToSetButton) {
-        console.log("here 2")
         const insideButton = document.querySelector('div.pt3');
 
         const newDiv = document.createElement('div');
@@ -13,12 +11,6 @@ function addButtonToWalmart() {
 
         let styleElement = document.createElement('style');
         styleElement.innerHTML = `
-            @font-face {
-            font-family: Inter;
-            src: local('Inter-SemiBold'), url(${chrome.runtime.getURL("asset/font/Inter-SemiBold.ttf")}) format('truetype');
-            font-weight: 600;
-            font-style: normal
-            }
             
             .div-text {
             font-family: Inter, sans-serif;
@@ -33,13 +25,48 @@ function addButtonToWalmart() {
             .stroke {
             margin-left : 100px;
             }
+            
+            .width-for-button {
+             width: 109%;
+            }
+            
+            @media screen and (max-width: 1136px) {
+             .width-for-button {
+                width: 110.4%;
+             }
+             
+             .div-text {
+            font-family: Inter, sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 27px;
+            color: white;
+            text-align: left;
+            margin-left : 22px;
+            }
+           }
+           
+           @media screen and (max-width: 1040px) {
+             .width-for-button {
+                width: 111.4%;
+             }
+             
+              .div-text {
+            font-family: Inter, sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 27px;
+            color: white;
+            text-align: left;
+            margin-left : 22px;
+            }
             `;
         styleElement.setAttribute('id', 'nightify');
         styleElement.setAttribute('type', "text/css");
         document.head.insertAdjacentElement('beforeend', styleElement);
 
         newDiv.innerHTML = `
-            <div style="display: flex; align-items: center; width: 395px; height: 90px; background: linear-gradient(91.42deg, #1F80F1 0%, #005DCA 100%); margin-top: 20px; transform: translateX(-16px)">
+            <div class="width-for-button" style="display: flex; align-items: center;  height: 90px; background: linear-gradient(91.42deg, #1F80F1 0%, #005DCA 100%); margin-top: 20px; transform: translateX(-16px)">
             <img src="${imageUrl}" style="margin-left: 12px;" alt="url"/>
             <div class="div-text" style="width: 166px; height: 54px;">
             Find product manual
